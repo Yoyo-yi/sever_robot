@@ -1,0 +1,12 @@
+{
+    "control": 0,
+    "automode": 0,
+    "low_battery": 80,
+    "start_time_h": 13,
+    "start_time_m": 25,
+    "end_time_h": 22,
+    "end_time_m": 10,
+    "time_flag": 0,
+    "patrol_frequency": 5,
+    "point": "(0.7,3.0,0) (3.0,-1.3,0) (1.4,-2.0,0)"
+}

@@ -1,0 +1,36 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild", // 任务执行的类型是 cppbuild
+            "label": "C/C++: g++ 生成活动文件", // 任务的名字
+            "command": "/usr/bin/g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}", // 当前文件名
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}", // 当前文件名（去掉扩展名）
+                "-lpthread",
+                "-lssl",          // OpenSSL 库
+                "-lcrypto",       // OpenSSL 的加密库
+                "-lcurl",         // libcurl 库
+                "-lwiringPi"      // WiringPi 库
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc" // 使用 gcc 捕获错误
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+                // 任务分组，因为是 tasks 而不是 task，意味着可以连着执行很多任务。
+                // 如果任务分组是 build，可以用 `run build task` 来运行。
+                // 如果任务分组是 test，可以用 `run test task` 来运行。
+            },
+            "detail": "调试器生成的任务。"
+        }
+    ],
+    "version": "2.0.0"
+}

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/patrol_11_17.dir/src/test_11_17.cpp.o  -o patrol_11_17  -lwiringPi -lcurl -lpthread /usr/lib/aarch64-linux-gnu/libcrypto.so 

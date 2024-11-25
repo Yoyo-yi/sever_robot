@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/orangepi/swy/patrol/build",
+  "command": "/usr/bin/c++   -I/home/orangepi/swy/patrol/src  -g   -o CMakeFiles/patrol_11_17.dir/src/test_11_17.cpp.o -c /home/orangepi/swy/patrol/src/test_11_17.cpp",
+  "file": "/home/orangepi/swy/patrol/src/test_11_17.cpp"
+}
+]
