@@ -53,7 +53,7 @@ CMAKE_BINARY_DIR = /home/orangepi/swy/patrol/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/patrol_11_17.dir/all
+all: CMakeFiles/patrol_11_27.dir/all
 
 .PHONY : all
 
@@ -84,12 +84,12 @@ clean: CMakeFiles/NightlyStart.dir/clean
 clean: CMakeFiles/ExperimentalCoverage.dir/clean
 clean: CMakeFiles/NightlyCoverage.dir/clean
 clean: CMakeFiles/ExperimentalStart.dir/clean
-clean: CMakeFiles/patrol_11_17.dir/clean
 clean: CMakeFiles/NightlyBuild.dir/clean
 clean: CMakeFiles/ExperimentalBuild.dir/clean
 clean: CMakeFiles/ExperimentalUpdate.dir/clean
 clean: CMakeFiles/ContinuousStart.dir/clean
 clean: CMakeFiles/ContinuousMemCheck.dir/clean
+clean: CMakeFiles/patrol_11_27.dir/clean
 clean: CMakeFiles/ContinuousTest.dir/clean
 clean: CMakeFiles/ContinuousSubmit.dir/clean
 
@@ -663,33 +663,6 @@ CMakeFiles/ExperimentalStart.dir/clean:
 .PHONY : CMakeFiles/ExperimentalStart.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/patrol_11_17.dir
-
-# All Build rule for target.
-CMakeFiles/patrol_11_17.dir/all:
-	$(MAKE) -f CMakeFiles/patrol_11_17.dir/build.make CMakeFiles/patrol_11_17.dir/depend
-	$(MAKE) -f CMakeFiles/patrol_11_17.dir/build.make CMakeFiles/patrol_11_17.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/orangepi/swy/patrol/build/CMakeFiles --progress-num=1,2 "Built target patrol_11_17"
-.PHONY : CMakeFiles/patrol_11_17.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/patrol_11_17.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/orangepi/swy/patrol/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/patrol_11_17.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/orangepi/swy/patrol/build/CMakeFiles 0
-.PHONY : CMakeFiles/patrol_11_17.dir/rule
-
-# Convenience name for target.
-patrol_11_17: CMakeFiles/patrol_11_17.dir/rule
-
-.PHONY : patrol_11_17
-
-# clean rule for target.
-CMakeFiles/patrol_11_17.dir/clean:
-	$(MAKE) -f CMakeFiles/patrol_11_17.dir/build.make CMakeFiles/patrol_11_17.dir/clean
-.PHONY : CMakeFiles/patrol_11_17.dir/clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/NightlyBuild.dir
 
 # All Build rule for target.
@@ -823,6 +796,33 @@ ContinuousMemCheck: CMakeFiles/ContinuousMemCheck.dir/rule
 CMakeFiles/ContinuousMemCheck.dir/clean:
 	$(MAKE) -f CMakeFiles/ContinuousMemCheck.dir/build.make CMakeFiles/ContinuousMemCheck.dir/clean
 .PHONY : CMakeFiles/ContinuousMemCheck.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/patrol_11_27.dir
+
+# All Build rule for target.
+CMakeFiles/patrol_11_27.dir/all:
+	$(MAKE) -f CMakeFiles/patrol_11_27.dir/build.make CMakeFiles/patrol_11_27.dir/depend
+	$(MAKE) -f CMakeFiles/patrol_11_27.dir/build.make CMakeFiles/patrol_11_27.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/orangepi/swy/patrol/build/CMakeFiles --progress-num=1,2 "Built target patrol_11_27"
+.PHONY : CMakeFiles/patrol_11_27.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/patrol_11_27.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/orangepi/swy/patrol/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/patrol_11_27.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/orangepi/swy/patrol/build/CMakeFiles 0
+.PHONY : CMakeFiles/patrol_11_27.dir/rule
+
+# Convenience name for target.
+patrol_11_27: CMakeFiles/patrol_11_27.dir/rule
+
+.PHONY : patrol_11_27
+
+# clean rule for target.
+CMakeFiles/patrol_11_27.dir/clean:
+	$(MAKE) -f CMakeFiles/patrol_11_27.dir/build.make CMakeFiles/patrol_11_27.dir/clean
+.PHONY : CMakeFiles/patrol_11_27.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/ContinuousTest.dir

@@ -30,14 +30,14 @@ include_directories(
     ${CURL_INCLUDE_DIRS}
 )
 
-add_executable(patrol_11_17 src/test_11_17.cpp)
-target_link_libraries(patrol_11_17
+add_executable(patrol_11_27 src/test_11_27.cpp)
+target_link_libraries(patrol_11_27
     ${WIRINGPI_LIB}
     ${CURL_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
     OpenSSL::Crypto
 )
-target_include_directories(patrol_11_17 PRIVATE 
+target_include_directories(patrol_11_27 PRIVATE 
     ${CMAKE_SOURCE_DIR}/src
 )
 

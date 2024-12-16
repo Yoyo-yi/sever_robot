@@ -23,12 +23,12 @@
 /home/orangepi/swy/patrol/build/CMakeFiles/ExperimentalCoverage.dir
 /home/orangepi/swy/patrol/build/CMakeFiles/NightlyCoverage.dir
 /home/orangepi/swy/patrol/build/CMakeFiles/ExperimentalStart.dir
-/home/orangepi/swy/patrol/build/CMakeFiles/patrol_11_17.dir
 /home/orangepi/swy/patrol/build/CMakeFiles/package.dir
 /home/orangepi/swy/patrol/build/CMakeFiles/NightlyBuild.dir
 /home/orangepi/swy/patrol/build/CMakeFiles/ExperimentalBuild.dir
 /home/orangepi/swy/patrol/build/CMakeFiles/ExperimentalUpdate.dir
 /home/orangepi/swy/patrol/build/CMakeFiles/ContinuousStart.dir
 /home/orangepi/swy/patrol/build/CMakeFiles/ContinuousMemCheck.dir
+/home/orangepi/swy/patrol/build/CMakeFiles/patrol_11_27.dir
 /home/orangepi/swy/patrol/build/CMakeFiles/ContinuousTest.dir
 /home/orangepi/swy/patrol/build/CMakeFiles/ContinuousSubmit.dir
