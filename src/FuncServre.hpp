@@ -20,107 +20,148 @@ void BotControl(std::atomic<bool> &runFlag){
 
     Controller bot_control;
     bool control_flag = 0;
-    unsigned char PS2_KEY;
+    // unsigned char PS2_KEY;
+    unsigned short PS2_KEY;
     unsigned char X1,Y1,X2,Y2; 
     std::string direction_ord = "";
     std::cout << "into user control" << std::endl;
     while(runFlag)
     {	   
-      PS2_KEY = bot_control.getKey();	 //手柄按键捕获处理
-	//   printf("now key :  %s " , PS2_KEY);
-	  switch(PS2_KEY)
-	  {
-	    //select键
-	    case PSB_SELECT:
-            // puts("PSB_SELECT");  	
-            break;
-	    //L3键
-	    case PSB_L3:
-            // puts("PSB_L3");  		
-            break; 
-	    //R3键		
-	    case PSB_R3:
-            // puts("PSB_R3");  		
-            break; 
-	    //start键		
-	    case PSB_START:
-            // puts("PSB_START");   	
-            break;
-
-	    //UP键
-	    case PSB_PAD_UP:
+        PS2_KEY = bot_control.getKey();	 //手柄按键捕获处理
+        printf("now key :  %d /n" , PS2_KEY);
+        if(PS2_KEY == (PSB_L2&PSB_PAD_UP)){
             if(control_flag == 1){
                 puts("PSB_PAD_UP"); 	
                 direction_ord = MoveByControl(0,500);
                 BotOrder(POST_MOVE, HTTP_OD::BOT_POST, direction_ord);
             }
-			break;	     
-	    //RIGHT键		
-	    case PSB_PAD_RIGHT:
+        }else if(PS2_KEY == (PSB_L2&PSB_PAD_RIGHT)){
             if(control_flag == 1){
                 puts("PSB_PAD_RIGHT");
                 direction_ord = MoveByControl(2,500);
                 BotOrder(POST_MOVE, HTTP_OD::BOT_POST, direction_ord);
-            }		
-			break;
-	    //DOWN键按	
-	    case PSB_PAD_DOWN:
+            }	            
+        }else if(PS2_KEY == (PSB_L2&PSB_PAD_DOWN)){
             if(control_flag == 1){
                 puts("PSB_PAD_DOWN");  	
 			    direction_ord = MoveByControl(1,500);
 			    BotOrder(POST_MOVE, HTTP_OD::BOT_POST, direction_ord);
             }
-			break;
-	    //LEFT键	
-	    case PSB_PAD_LEFT:
+        }else if(PS2_KEY == (PSB_L2&PSB_PAD_LEFT)){
             if(control_flag == 1){
                 puts("PSB_PAD_LEFT");  	
 			    direction_ord = MoveByControl(3,500);
 			    BotOrder(POST_MOVE, HTTP_OD::BOT_POST, direction_ord);
             }
-
-			break; 
-
-	    //L2按键
-	    case PSB_L2: 
-            // puts("PSB_L2");  		
-            break; 
-	    //R2按键
-	    case PSB_R2:
-            // puts("PSB_R2");  		
-            break; 
-	    //L1按键
-	    case PSB_L1:
-            // puts("PSB_L1");  		
-            break; 
-	    //R1按键
-	    case PSB_R1:
-            // puts("PSB_R1");  		
-            break; 
-	    //三角形按键		
-	    case PSB_TRIANGLE:
+        }else if(PS2_KEY == (PSB_L2&PSB_TRIANGLE)){
             if(control_flag == 1){
 			    puts("PSB_TRIANGLE");  	
 			    direction_ord = GoHomeAction();
 			    BotOrder(POST_RETURN_POLE, HTTP_OD::BOT_POST, direction_ord);
             }
-			break; 
-	    //圆形键
-	    case PSB_CIRCLE:
-            puts("PSB_CIRCLE");  	
-            control_flag = 0;
-            break; 	    
-	    //方形键
-	    case PSB_SQUARE:
-            puts("PSB_SQUARE");  	
-            break;
-	    //X按键
-	    case PSB_CROSS:
+        }else if(PS2_KEY == PSB_CROSS){
             puts("PSB_X");		
             control_flag = 1;
-            break;
+        }else if(PS2_KEY == PSB_CIRCLE){
+            puts("PSB_CIRCLE");  	
+            control_flag = 0;
+        }
+
+
+	//   printf("now key :  %d /n" , PS2_KEY);
+	//   switch(PS2_KEY)
+	//   {
+	//     //select键
+	//     case PSB_SELECT:
+    //         // puts("PSB_SELECT");  	
+    //         break;
+	//     //L3键
+	//     case PSB_L3:
+    //         // puts("PSB_L3");  		
+    //         break; 
+	//     //R3键		
+	//     case PSB_R3:
+    //         // puts("PSB_R3");  		
+    //         break; 
+	//     //start键		
+	//     case PSB_START:
+    //         // puts("PSB_START");   	
+    //         break;
+
+	//     //UP键
+	//     case PSB_PAD_UP:
+    //         if(control_flag == 1){
+    //             puts("PSB_PAD_UP"); 	
+    //             direction_ord = MoveByControl(0,500);
+    //             BotOrder(POST_MOVE, HTTP_OD::BOT_POST, direction_ord);
+    //         }
+	// 		break;	     
+	//     //RIGHT键		
+	//     case PSB_PAD_RIGHT:
+    //         if(control_flag == 1){
+    //             puts("PSB_PAD_RIGHT");
+    //             direction_ord = MoveByControl(2,500);
+    //             BotOrder(POST_MOVE, HTTP_OD::BOT_POST, direction_ord);
+    //         }		
+	// 		break;
+	//     //DOWN键按	
+	//     case PSB_PAD_DOWN:
+    //         if(control_flag == 1){
+    //             puts("PSB_PAD_DOWN");  	
+	// 		    direction_ord = MoveByControl(1,500);
+	// 		    BotOrder(POST_MOVE, HTTP_OD::BOT_POST, direction_ord);
+    //         }
+	// 		break;
+	//     //LEFT键	
+	//     case PSB_PAD_LEFT:
+    //         if(control_flag == 1){
+    //             puts("PSB_PAD_LEFT");  	
+	// 		    direction_ord = MoveByControl(3,500);
+	// 		    BotOrder(POST_MOVE, HTTP_OD::BOT_POST, direction_ord);
+    //         }
+
+	// 		break; 
+
+	//     //L2按键
+	//     case PSB_L2: 
+    //         // puts("PSB_L2");  		
+    //         break; 
+	//     //R2按键
+	//     case PSB_R2:
+    //         // puts("PSB_R2");  		
+    //         break; 
+	//     //L1按键
+	//     case PSB_L1:
+    //         // puts("PSB_L1");  		
+    //         break; 
+	//     //R1按键
+	//     case PSB_R1:
+    //         // puts("PSB_R1");  		
+    //         break; 
+	//     //三角形按键		
+	//     case PSB_TRIANGLE:
+    //         if(control_flag == 1){
+	// 		    puts("PSB_TRIANGLE");  	
+	// 		    direction_ord = GoHomeAction();
+	// 		    BotOrder(POST_RETURN_POLE, HTTP_OD::BOT_POST, direction_ord);
+    //         }
+	// 		break; 
+	//     //圆形键
+	//     case PSB_CIRCLE:
+    //         puts("PSB_CIRCLE");  	
+    //         control_flag = 0;
+    //         break; 	    
+	//     //方形键
+	//     case PSB_SQUARE:
+    //         puts("PSB_SQUARE");  	
+    //         break;
+	//     //X按键
+	//     case PSB_CROSS:
+    //         puts("PSB_X");		
+    //         control_flag = 1;
+    //         break;
 							
-	   }
+	//    }
       
 	  //当L1或者R1按下时，读取摇杆数据的模拟值
 	  if(PS2_KEY == PSB_L1 || PS2_KEY == PSB_R1)
@@ -181,6 +222,20 @@ std::string ProcessPoints(const std::vector<location_status>& points, std::atomi
     }
 
     return HTTP_RETURN;
+}
+
+std::string SetSpeet(std::string speed) {
+
+    int set_speed_Flag = sendHttpPut(PUT_SPEED,speed,false);
+    if(set_speed_Flag){
+        std::cout << " Set Speed succeed! " << std::endl;
+        return "ok";
+    }else{
+        std::cout << " Set Speed failed! " << std::endl;
+        return "err";
+    }
+
+
 }
 
 
@@ -308,8 +363,14 @@ void HttpBotMove(const httplib::Request& req, httplib::Response& res) {
 
             // 创建动作点并执行命令
             std::string move_point_flag = "";
-            std::string point = CreateActionPoint(x, y, yaw);
-            move_point_flag = BotOrder(POST_MOVE, HTTP_OD::BOT_POST, point);
+            if(x==0 && y==0 && yaw==0){
+                std::string point = GoHomeAction();
+			    move_point_flag = BotOrder(POST_RETURN_POLE, HTTP_OD::BOT_POST, point);
+            }else{
+                std::string point = CreateActionPoint(x, y, yaw);
+                move_point_flag = BotOrder(POST_MOVE, HTTP_OD::BOT_POST, point);
+            }
+            
 
             if (move_point_flag.compare("err") == 0){
                 response_data = {
@@ -442,7 +503,65 @@ void BotLocalMap(const httplib::Request& req, httplib::Response& res) {
     // res.status = 200;
 
 
+}
 
+void BotSpeed(const httplib::Request& req, httplib::Response& res) {
+    std::cout << "Received PUT request for /Speed" << std::endl;
+
+    try {
+        // 解析 JSON 数据
+        auto jsonData = json::parse(req.body);
+        json response_data;
+
+        // 检查字段是否存在并提取
+        // 格式 put : "speed" = (float)
+        if (jsonData.contains("speed")) {
+            float speed = jsonData["speed"];
+            std::cout << "set speed : " << speed << std::endl;
+
+            std::string set_speed_flag = "";
+            std::string set_speed = ControlSpeed(speed);
+            set_speed_flag = SetSpeet(set_speed);
+
+            if (set_speed_flag.compare("err") == 0){
+                response_data = {
+                    {"code", 500},
+                    {"msg", NULL},
+                    {"data","失败"}
+                };
+            }else{
+                response_data = {
+                    {"code", 200},
+                    {"msg", NULL},
+                    {"data","成功"}
+                };
+            }
+
+
+            // 设置 HTTP 响应状态和内容
+            res.status = 200;  // 设置 HTTP 状态为 200 OK
+            res.set_content(response_data.dump(), "application/json");
+            // res.set_content("Move command accepted", "text/plain");
+        } else {
+            // 字段缺失，返回 400 Bad Request
+            response_data = {
+                {"code", 400},
+                {"msg", NULL},
+                {"data","请求字段缺失"}
+            };
+            res.status = 400;
+            res.set_content(response_data.dump(), "application/json");
+            // res.set_content("Missing required fields: x, y, or yaw", "text/plain");
+        }
+    } catch (const json::exception& e) {
+        // JSON 解析错误
+        res.status = 400;  // 设置 HTTP 状态为 400 Bad Request
+        res.set_content("Invalid JSON: " + std::string(e.what()), "text/plain");
+    } catch (const std::exception& e) {
+        // 其他错误
+        res.status = 500;  // 设置 HTTP 状态为 500 Internal Server Error
+        res.set_content("Internal Server Error: " + std::string(e.what()), "text/plain");
+    }
 
 }
 
@@ -467,10 +586,20 @@ void registerRobotHandlers(httplib::Server& svr) {
         }
     });
 
-        //机器人状态接口
+    //机器人建图接口
     svr.Get("/map", [&](const httplib::Request& req, httplib::Response& res) {
         try {
             BotLocalMap(req, res);
+        } catch (const std::exception& e) {
+            res.status = 500; // 捕获外层异常并返回 500 错误状态
+            res.set_content("Internal Server Error: " + std::string(e.what()), "text/plain");
+        }
+    });
+
+    //机器人系统速度
+    svr.Put("/speed", [&](const httplib::Request& req, httplib::Response& res) {
+        try {
+            BotSpeed(req, res);
         } catch (const std::exception& e) {
             res.status = 500; // 捕获外层异常并返回 500 错误状态
             res.set_content("Internal Server Error: " + std::string(e.what()), "text/plain");
@@ -607,7 +736,7 @@ int PowerMode(const user_setting& setting_data, std::atomic<bool> &runFlag) {
 
 void MapInit() {
     std::cout << " Bot is Init Map " << std::endl;
-    int Map_init_Flag = sendHttpPutFile(PUT_MAP,MAP_STCM_FILE_PATH);
+    int Map_init_Flag = sendHttpPut(PUT_MAP,MAP_STCM_FILE_PATH,true);
     if(Map_init_Flag){
         std::cout << " Init Map succeed! " << std::endl;
     }else{
@@ -615,6 +744,8 @@ void MapInit() {
     }
 
 }
+
+
 
 
 

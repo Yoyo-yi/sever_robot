@@ -1,6 +1,10 @@
 {
     "control": 0,
+    "//control":"0=遥控模式; 1=自动巡逻; 2=静止营业",	
+
     "automode": 0,
+    "//automode":"0=按时巡逻; 1=按电量巡逻;",
+
     "low_battery": 80,
     "start_time_h": 13,
     "start_time_m": 25,

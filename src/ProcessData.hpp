@@ -173,6 +173,19 @@ std::string MoveByControl(int direction, int time)
     return jsonData.c_str();
 }
 
+std::string ControlSpeed(float speed)
+{
+    json temp_data;
+
+    temp_data["param"] = "base.max_moving_speed";
+    temp_data["value"] = std::to_string(speed); 
+
+
+    std::string jsonData = temp_data.dump();
+
+    return jsonData.c_str();
+}
+
 
 
 #endif

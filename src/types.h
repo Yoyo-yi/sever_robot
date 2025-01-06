@@ -12,6 +12,7 @@
 #define GET_ACTION_STATE    BOT_ADDR_IP "/api/core/motion/v1/actions/:current"       //当前运动状态
 
 #define PUT_MAP             BOT_ADDR_IP "/api/core/slam/v1/maps/stcm"                //初始化地图地址
+#define PUT_SPEED           BOT_ADDR_IP "/api/core/system/v1/parameter"
                                         
 
 #define POST_MOVE           BOT_ADDR_IP "/api/core/motion/v1/actions"           //移动

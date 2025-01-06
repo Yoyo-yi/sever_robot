@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Linux-c++"
+	BuildStamp="20241219-0701-Experimental"
+	Name="orangepi5"
+	Generator="ctest-3.16.3"
+	CompilerName="/usr/bin/c++"
+	CompilerVersion="9.4.0"
+	OSName="Linux"
+	Hostname="orangepi5"
+	OSRelease="5.10.160-rockchip-rk3588"
+	OSVersion="#1.1.10 SMP Thu Jul 4 17:56:48 CST 2024"
+	OSPlatform="aarch64"
+	Is64Bits="1"
+	VendorString=""
+	VendorID="Unknown Manufacturer"
+	FamilyID="8"
+	ModelID="0"
+	ProcessorCacheSize="0"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="1"
+	TotalVirtualMemory="7859"
+	TotalPhysicalMemory="15718"
+	LogicalProcessorsPerPhysical="8"
+	ProcessorClockFrequency="0"
+	>
+	<Testing>
+		<StartDateTime>Dec 19 15:01 CST</StartDateTime>
+		<StartTestTime>1734591696</StartTestTime>
+		<TestList/>
+		<EndDateTime>Dec 19 15:01 CST</EndDateTime>
+		<EndTestTime>1734591696</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

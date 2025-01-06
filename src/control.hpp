@@ -6,23 +6,41 @@
 #include <cstring>
 #include <cstdio>
 
+// /*定义手柄按键*/
+// #define PSB_SELECT      1
+// #define PSB_L3          2
+// #define PSB_R3          3
+// #define PSB_START       4
+// #define PSB_PAD_UP      5
+// #define PSB_PAD_RIGHT   6
+// #define PSB_PAD_DOWN    7
+// #define PSB_PAD_LEFT    8
+// #define PSB_L2          9
+// #define PSB_R2          10
+// #define PSB_L1          11
+// #define PSB_R1          12
+// #define PSB_TRIANGLE    13
+// #define PSB_CIRCLE      14
+// #define PSB_CROSS       15
+// #define PSB_SQUARE      16
+
 /*定义手柄按键*/
-#define PSB_SELECT      1
-#define PSB_L3          2
-#define PSB_R3          3
-#define PSB_START       4
-#define PSB_PAD_UP      5
-#define PSB_PAD_RIGHT   6
-#define PSB_PAD_DOWN    7
-#define PSB_PAD_LEFT    8
-#define PSB_L2          9
-#define PSB_R2          10
-#define PSB_L1          11
-#define PSB_R1          12
-#define PSB_TRIANGLE    13
-#define PSB_CIRCLE      14
-#define PSB_CROSS       15
-#define PSB_SQUARE      16
+#define PSB_SELECT      0b1111111111111110
+#define PSB_L3          0b1111111111110101
+#define PSB_R3          0b1111111111111011
+#define PSB_START       0b1111111111110111
+#define PSB_PAD_UP      0b1111111111101111
+#define PSB_PAD_RIGHT   0b1111111111011111
+#define PSB_PAD_DOWN    0b1111111110111111
+#define PSB_PAD_LEFT    0b1111111101111111
+#define PSB_L2          0b1111111011111111
+#define PSB_R2          0b1111110111111111
+#define PSB_L1          0b1111101111111111
+#define PSB_R1          0b1111011111111111
+#define PSB_TRIANGLE    0b1110111111111111
+#define PSB_CIRCLE      0b1101111111111111
+#define PSB_CROSS       0b1011111111111111
+#define PSB_SQUARE      0b0111111111111111
 
 
 /*回发过来的后4个数据是摇杆的数据,data中的数据位*/
@@ -66,7 +84,7 @@ public:
         return data[button];
     }
 
-    unsigned char getKey() {  // 获取按键类型
+    unsigned short getKey() {  // 获取按键类型
         clearData();
         digitalWrite(PS2_SEL_PIN, LOW);
         for (int i = 0; i < 9; i++) {
@@ -75,12 +93,13 @@ public:
         digitalWrite(PS2_SEL_PIN, HIGH);
 
         handkey = (data[4] << 8) | data[3];
-        for (int index = 0; index < 16; index++) {
-            if ((handkey & (1 << (mask[index] - 1))) == 0) {
-                return index + 1;
-            }
-        }
-        return 0;  // 没有按键按下
+        // printf("handkey :  %d /n" , handkey);
+        // for (int index = 0; index < 16; index++) {
+        //     if ((handkey & (1 << (mask[index] - 1))) == 0) {
+        //         return index + 1;
+        //     }
+        // }
+        return handkey;  // 没有按键按下
     }
 
 private:

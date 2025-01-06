@@ -79,7 +79,7 @@ static size_t PutCallback(void* buffer, size_t size, size_t count, void* respons
     return size * count;
 }
 
-int sendHttpPutFile(const std::string& url, const std::string& filePath) 
+int sendHttpPut(const std::string& url, const std::string& data, bool isFile) 
 {
     int PUT_END = 1;
     std::string response;
@@ -87,51 +87,87 @@ int sendHttpPutFile(const std::string& url, const std::string& filePath)
     if (curl) {
         CURLcode res;
         struct curl_slist* headers = NULL;
-        FILE* file = fopen(filePath.c_str(), "rb");
-        if (!file) {
-            std::cerr << "Failed to open file: " << filePath << std::endl;
-            return 0;
+
+        if(isFile){
+            FILE* file = fopen(data.c_str(), "rb");
+            if (!file) {
+                std::cerr << "Failed to open file: " << data << std::endl;
+                return 0;
+            }
+
+            // 获取文件大小
+            fseek(file, 0, SEEK_END);
+            long fileSize = ftell(file);
+            fseek(file, 0, SEEK_SET);
+
+            // 设置 HTTP 基础选项
+            curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, PutCallback);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&response);
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false); // 不验证证书
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
+
+            // 设置 HTTP 请求 URL
+            curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+
+            // 设置 HTTP 请求头
+            headers = curl_slist_append(headers, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0)");
+            headers = curl_slist_append(headers, "Content-Type: application/octet-stream");
+            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+            // 设置 PUT 方法
+            curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "PUT");
+
+            // 设置文件流和读取回调
+            curl_easy_setopt(curl, CURLOPT_READDATA, file);
+            curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
+            curl_easy_setopt(curl, CURLOPT_INFILESIZE_LARGE, static_cast<curl_off_t>(fileSize));
+
+            // 执行 HTTP PUT 请求
+            res = curl_easy_perform(curl);
+            fclose(file);
+
+            if (res != CURLE_OK) {
+                std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+                curl_slist_free_all(headers);
+                curl_easy_cleanup(curl);
+                return 0;
+            }
+
+        }else{
+            // 处理字符串上传
+            curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, PutCallback);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&response);
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);  // 不验证证书
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
+
+            // 设置 HTTP 请求 URL
+            curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+
+            // 设置 HTTP 请求头
+            headers = curl_slist_append(headers, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0)");
+            headers = curl_slist_append(headers, "Content-Type: text/plain");  // 设置为纯文本
+            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+            // 设置 PUT 方法
+            curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "PUT");
+
+            // 设置要上传的字符串数据
+            curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data.c_str());
+            curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, data.length());
+
+            // 执行 HTTP PUT 请求
+            res = curl_easy_perform(curl);
+
+            if (res != CURLE_OK) {
+                std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+                curl_slist_free_all(headers);
+                curl_easy_cleanup(curl);
+                return 0;
+            }
         }
-
-        // 获取文件大小
-        fseek(file, 0, SEEK_END);
-        long fileSize = ftell(file);
-        fseek(file, 0, SEEK_SET);
-
-        // 设置 HTTP 基础选项
-        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, PutCallback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&response);
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false); // 不验证证书
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
-
-        // 设置 HTTP 请求 URL
-        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-
-        // 设置 HTTP 请求头
-        headers = curl_slist_append(headers, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0)");
-        headers = curl_slist_append(headers, "Content-Type: application/octet-stream");
-        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-
-        // 设置 PUT 方法
-        curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "PUT");
-
-        // 设置文件流和读取回调
-        curl_easy_setopt(curl, CURLOPT_READDATA, file);
-        curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
-        curl_easy_setopt(curl, CURLOPT_INFILESIZE_LARGE, static_cast<curl_off_t>(fileSize));
-
-        // 执行 HTTP PUT 请求
-        res = curl_easy_perform(curl);
-        fclose(file);
-
-        if (res != CURLE_OK) {
-            std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
-            curl_slist_free_all(headers);
-            curl_easy_cleanup(curl);
-            return 0;
-        }
-
+        
         // 清理资源
         curl_slist_free_all(headers);
         curl_easy_cleanup(curl);
@@ -292,7 +328,7 @@ std::string BotOrder(const std::string& url, HTTP_OD CommandType, const std::str
             std::cout << "curl init err" << std::endl;
             return "err";
         }
-        return "POST_OK";
+        return "ok";
     }
     else {
         std::cout << "order err" << std::endl;
@@ -315,7 +351,7 @@ std::string BotOrder(const std::string& url, HTTP_OD CommandType)
         else {
             return http_data;
         }
-        return "GET_OK";
+        return "ok";
     }
     else {
         std::cout << "order err" << std::endl;
